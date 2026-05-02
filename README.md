@@ -16,6 +16,14 @@ docker build -t ci-cd-test-api:latest .
 
 Run Container:
 docker run --env_file api/.env -p 8000:8000 -d ci-cd-test-api:latest
+
+Build and run using Docker compose:
+docker compose up --build
+
+Stop container:
+docker stop ci-cd-test-api:latest
+OR
+docker compose down
 ```
 
 Libraries used:
