@@ -26,7 +26,7 @@ func ReturnLargest(a, b int) int {
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("Using system env")
 	}
 	PORT := os.Getenv("API_PORT")
 	PORT_STR := ":" + PORT
