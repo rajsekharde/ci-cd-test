@@ -15,6 +15,14 @@ func HandleRoot(w http.ResponseWriter, r *http.Request) {
 	log.Printf("%s %s %d\n", r.Method, r.URL.Path, http.StatusOK)
 }
 
+func ReturnLargest(a, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
+}
+
 func main() {
 	err := godotenv.Load()
 	if err != nil {
