@@ -29,6 +29,9 @@ func main() {
 		log.Println("Using system env")
 	}
 	PORT := os.Getenv("API_PORT")
+	if PORT == "" {
+		PORT = "8000"
+	}
 	PORT_STR := ":" + PORT
 
 	mux := http.NewServeMux()

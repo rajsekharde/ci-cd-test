@@ -1,6 +1,6 @@
 services:
   api:
-    build: api
+    image: rajsekhar05/ci-cd-test-api:latest
     container_name: ci-cd-test-api
     ports:
       - "8000:8000"
