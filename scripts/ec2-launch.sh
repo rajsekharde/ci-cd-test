@@ -1,16 +1,16 @@
 #!/bin/bash
 
-set -a
-source .env
-set +a
-
-# Script to launch an AWS EC2 instance with parameters specified in .env file.
+# Script for launching an AWS EC2 instance with parameters specified in .env file.
 # Displays the Instance ID and public IPv4 address of the instance after launching.
 
 if [ ! -f .env ]; then
   echo ".env file not found!"
   exit 1
 fi
+
+set -a
+source .env
+set +a
 
 echo "Launching EC2 instance..."
 
