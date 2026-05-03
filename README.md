@@ -8,6 +8,7 @@
 - Run it using Docker Compose
 - Push the image to Docker hub
 - Launch a new EC2 instance and install docker, docker compose on it
+- Copy docker-compose.prod.yml file into it
 - Pull the image from Docker hub to the instance
 
 
@@ -42,7 +43,22 @@ The app will be hosted on an AWS EC2 instance with Ubuntu OS and amd64 architect
 Make the scripts executable:
 chmod +x scripts/*.sh
 
-Launching instance:
+Launch instance:
 ./scripts/ec2-launch.sh
 Returns the instance ID and public IPv4 address
+
+SSH into the instance:
+ssh -i <key-pair .pem file> <user>@<public IPv4 address>
+
+Copy files to the instance:
+scp -i <key-pair .pem file> ./scripts/ec2-setup.sh <user>@<public IPv4 address>:/home/ubuntu/ec2-setup.sh
+
+Set up instance and install git, docker, docker compose:
+./scripts/ec2-launch.sh
+
+Stop instance:
+./scripts/ec2-stop.sh
+
+Terminate instance:
+./scripts/ec2-terminate.sh
 ```
