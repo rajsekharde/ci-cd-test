@@ -10,11 +10,13 @@
 - Launch a new EC2 instance and install docker, docker compose on it
 - Copy docker-compose.prod.yml file into it
 - Pull the image from Docker hub to the instance
+- Create a .env having contents: API_KEY=8000
+- Run the container using docker compose and test the endpoint
 
 
 ## API
 
-Minimal Go http server with one endpoing: GET /. Containerised using Docker.
+Minimal Go http server with one endpoint: GET /. Containerised using Docker.
 ```bash
 Build Image:
 docker build -t ci-cd-test-api:latest .
@@ -47,14 +49,16 @@ Launch instance:
 ./scripts/ec2-launch.sh
 Returns the instance ID and public IPv4 address
 
+Copy files to the instance:
+scp -i <key-pair .pem file> ./scripts/ec2-setup.sh <user>@<public IPv4 address>:/home/ubuntu/ec2-setup.sh
+scp -i <key-pair .pem file> ./docker-compose.prod.yml <user>@<public IPv4 address>:/home/ubuntu/docker-compose.prod.yml
+
 SSH into the instance:
 ssh -i <key-pair .pem file> <user>@<public IPv4 address>
 
-Copy files to the instance:
-scp -i <key-pair .pem file> ./scripts/ec2-setup.sh <user>@<public IPv4 address>:/home/ubuntu/ec2-setup.sh
-
 Set up instance and install git, docker, docker compose:
-./scripts/ec2-launch.sh
+chmod +x ec2-setup.sh
+sudo ./ec2-setup.sh
 
 Stop instance:
 ./scripts/ec2-stop.sh
