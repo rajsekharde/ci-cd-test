@@ -18,6 +18,7 @@ CI pipeline setup
 - Create .github/workflows/ci.yml
 - Add the CI script to build, test and push image
 - Add new secrets to GitHub repository: docker username and password
+- Commit and push code. Github actions runs script automatically. Runs tests, builds image and pushes it to docker hub
 
 
 ## API
