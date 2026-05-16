@@ -11,7 +11,7 @@ Initial project setup
 - Launch a new EC2 instance and install docker, docker compose on it
 - Copy docker-compose.prod.yml file into it
 - Pull the image from Docker hub to the instance
-- Create a .env having contents: API_KEY=8000
+- Create a .env having contents: API_PORT=8000
 - Run the container using docker compose and test the endpoint
 
 CI pipeline setup
@@ -19,6 +19,12 @@ CI pipeline setup
 - Add the CI script to build, test and push image
 - Add new secrets to GitHub repository: docker username and password
 - Commit and push code. Github actions runs script automatically. Runs tests, builds image and pushes it to docker hub
+
+CD pipeline setup
+- Create .github/workflows/cd.yml
+- Add the CD script to ssh into an instance, pull latest docker image and run it
+- Add new secrets to Github repository: EC2 IP address, username, ssh key
+- Commit and push code. Upon success of CI pipeline, the CD script runs.
 
 ## CI Pipeline
 
@@ -80,7 +86,7 @@ Returns the instance ID and public IPv4 address
 
 Copy files to the instance:
 scp -i <key-pair .pem file> ./scripts/ec2-setup.sh <user>@<public IPv4 address>:/home/ubuntu/ec2-setup.sh
-scp -i <key-pair .pem file> ./docker-compose.prod.yml <user>@<public IPv4 address>:/home/ubuntu/docker-compose.prod.yml
+scp -i <key-pair .pem file> ./docker-compose.prod.yml <user>@<public IPv4 address>:/home/ubuntu/docker-compose.yml
 
 SSH into the instance:
 ssh -i <key-pair .pem file> <user>@<public IPv4 address>
