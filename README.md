@@ -20,6 +20,19 @@ CI pipeline setup
 - Add new secrets to GitHub repository: docker username and password
 - Commit and push code. Github actions runs script automatically. Runs tests, builds image and pushes it to docker hub
 
+## CI Pipeline
+
+CI (Continuous Integration) pipeline: An automated workflow that runs whenever code is pushed to a repository.
+
+In this project, the CI pipeline is implemented using GitHub Actions. Whenever a commit is pushed to the main branch, the pipeline:
+- Checks out the repository code
+- Sets up the Go environment
+- Runs Go tests inside the api/ directory
+- Builds a Docker image for the application
+- Logs into Docker Hub using GitHub Secrets
+- Pushes the newly built Docker image to Docker Hub
+
+This automates the process of validating the application and generating a deployable container image for every code change.
 
 ## API
 
