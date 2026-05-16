@@ -2,6 +2,7 @@
 
 ## Workflow
 
+Initial project setup
 - Build a simple Go http server
 - Add basic tests
 - Containerize it using Docker
@@ -12,6 +13,11 @@
 - Pull the image from Docker hub to the instance
 - Create a .env having contents: API_KEY=8000
 - Run the container using docker compose and test the endpoint
+
+CI pipeline setup
+- Create .github/workflows/ci.yml
+- Add the CI script to build, test and push image
+- Add new secrets to GitHub repository: docker username and password
 
 
 ## API
@@ -31,6 +37,15 @@ Stop container:
 docker stop ci-cd-test-api:latest
 OR
 docker compose down
+
+Tag image:
+docker tag ci-cd-test-api:latest {username}/ci-cd-test-api:latest
+
+Push image to docker hub:
+docker push {username}/ci-cd-test-api:latest
+
+Pull image from docker hub to a different machine:
+docker pull {username}/ci-cd-test-api:latest
 ```
 
 Libraries used:

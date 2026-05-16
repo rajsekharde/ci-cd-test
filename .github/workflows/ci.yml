@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-build-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Run tests
+        working-directory: ./api
+        run: go test ./...
+      
+      - name: Build Docker image
+        working-directory: ./api
+        run: docker build -t ci-cd-test-api:latest .
+      
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      
+      - name: Push Image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ci-cd-test-api:latest
