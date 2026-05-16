@@ -25,6 +25,7 @@ CD pipeline setup
 - Add the CD script to ssh into an instance, pull latest docker image and run it
 - Add new secrets to Github repository: EC2 IP address, username, ssh key
 - Commit and push code. Upon success of CI pipeline, the CD script runs.
+- ** GitHub repository secrets should be updated with latest EC2 instance IP address
 
 ## CI Pipeline
 
@@ -39,6 +40,18 @@ In this project, the CI pipeline is implemented using GitHub Actions. Whenever a
 - Pushes the newly built Docker image to Docker Hub
 
 This automates the process of validating the application and generating a deployable container image for every code change.
+
+# CD Pipeline
+
+CD (Continuous Deployment / Continuous Delivery) pipeline: Automates the process of updating the running application after CI succeeds.
+
+In this project, the goal of CD is:
+- New code pushed
+- CI builds & pushes Docker image
+- Server automatically pulls latest image
+- Containers restart with new version
+
+So instead of manually SSHing into the EC2 instance and running Docker commands, GitHub Actions does it automatically.
 
 ## API
 
