@@ -11,7 +11,7 @@ import (
 
 func HandleRoot(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintln(w, "Hello")
+	fmt.Fprintln(w, "Hello from CI/CD test app")
 	log.Printf("%s %s %d\n", r.Method, r.URL.Path, http.StatusOK)
 }
 
